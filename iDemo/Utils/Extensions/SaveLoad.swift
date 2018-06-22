@@ -14,7 +14,7 @@ class SaveLoad{
   //MARK: variables
   var context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
   static let shared = SaveLoad()
-  
+  var checkData : [UserData]?
   //MARK: Save Function
   func save(){
     do{
@@ -25,13 +25,57 @@ class SaveLoad{
     }
   }
   
-  //MARK: Load Functions
-  func loadUserData(){
-    
+  //MARK: Functions
+  func checkCredentials(with predicate: NSPredicate , password : String) -> Bool{
+    let request: NSFetchRequest<UserData> = UserData.fetchRequest()
+    request.predicate = predicate
+    do{
+      checkData = try context.fetch(request)
+      if checkData?.count != 0 && checkData?[0].password == password{
+         return true
+      }
+      else{
+         return false
+      }
+    }
+    catch{
+      fatalError("Error while fetching!")
+    }
+    return false
+ }
+  
+  func checkUsername(with predicate: NSPredicate) -> Bool{
+    let request: NSFetchRequest<UserData> = UserData.fetchRequest()
+    request.predicate = predicate
+    do{
+      checkData = try context.fetch(request)
+      if checkData?.count != 0 {
+        return false
+      }
+      else{
+        return true
+      }
+    }
+    catch{
+      fatalError("Error while checking user")
+    }
   }
   
-  func loadImages() {
-    
+  func checkEmail(with predicate: NSPredicate) -> Bool {
+    let request: NSFetchRequest<UserData> = UserData.fetchRequest()
+    request.predicate = predicate
+    do{
+      checkData = try context.fetch(request)
+      if checkData?.count != 0 {
+        return true
+      }
+      else{
+        return false
+      }
+    }
+    catch{
+      fatalError("Error while checking user")
+    }
   }
   
 }

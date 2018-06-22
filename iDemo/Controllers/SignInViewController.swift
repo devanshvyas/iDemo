@@ -7,9 +7,13 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class SignInViewController: UIViewController {
 
+  //MARK: variables
+  
+  //MARK: outlets
   @IBOutlet weak var username: UITextField!
   @IBOutlet weak var password: UITextField!
   override func viewDidLoad() {
@@ -18,5 +22,13 @@ class SignInViewController: UIViewController {
     }
 
   @IBAction func loginButton(_ sender: UIButton) {
+    let predicate = NSPredicate(format: "username MATCHES %@", username.text!)
+    let check = SaveLoad.shared.checkCredentials(with: predicate, password: password.text!)
+    if check == true{
+      SVProgressHUD.showSuccess(withStatus: "Login Successfull!")
+    }
+    else{
+      SVProgressHUD.showError(withStatus: "Invalid Username or password")
+    }
   }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class SignUpViewController: UIViewController {
 
@@ -29,17 +30,37 @@ class SignUpViewController: UIViewController {
 
   //MARK: Buttons Action
   @IBAction func signUpButton(_ sender: UIButton) {
-    if (name.text != nil),(email.text != nil),(mobileNo.text?.count == 10),(username.text != nil),(password.text != nil){
-      newData.fullName = name.text
-      newData.email = email.text
-      newData.mobileNumber = Int64(mobileNo.text!)!
-      newData.username = username.text
-      newData.password = password.text
-      if let img = profileImage.image{
-        newData.profilePic = img
+    let predicate1 = NSPredicate(format: "username MATCHES %@", username.text ?? "")
+    let predicate2 = NSPredicate(format: "%@ like '*@*.com'", email.text ?? "")
+    let checkUser = data.checkUsername(with: predicate1)
+    let checkMail = data.checkEmail(with: predicate2)
+    if (name.text != ""),(email.text != ""),(mobileNo.text != ""),(username.text != ""),(password.text != ""){
+      if checkMail == true{
+        if checkUser == true{
+          newData.fullName = name.text
+          newData.email = email.text
+          newData.mobileNumber = Int64(mobileNo.text!)!
+          newData.username = username.text
+          newData.password = password.text
+          if let img = profileImage.image{
+            newData.profilePic = img
+          }
+          data.save()
+          SVProgressHUD.showSuccess(withStatus: "Account Created")
+        }
+        else{
+          SVProgressHUD.showError(withStatus: "Username Exists!")
+        }
       }
-      data.save()
+      else{
+        SVProgressHUD.showError(withStatus: "Invalid Email")
+      }
+      
     }
+    else{
+      SVProgressHUD.showInfo(withStatus: "Fill all fields")
+    }
+    
   }
   
   @IBAction func addImage(_ sender: UIButton) {
