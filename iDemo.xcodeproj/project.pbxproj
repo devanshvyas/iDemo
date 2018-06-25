@@ -10,15 +10,19 @@
 		050ED6B420DCF67F00963A8C /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050ED6B320DCF67F00963A8C /* SignUpViewController.swift */; };
 		050ED6B620DCF69000963A8C /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050ED6B520DCF69000963A8C /* SignInViewController.swift */; };
 		050ED6B820DCF6AB00963A8C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 050ED6B720DCF6AB00963A8C /* HomeViewController.swift */; };
-		054A7E6E20DD016C001CFFE8 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054A7E6D20DD016C001CFFE8 /* UIViewController.swift */; };
 		054A7E7120DD0294001CFFE8 /* SaveLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054A7E7020DD0294001CFFE8 /* SaveLoad.swift */; };
 		054A7E7320DD1204001CFFE8 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054A7E7220DD1204001CFFE8 /* ImagePicker.swift */; };
+		05D40D2F20E0B5CF00FFDCD2 /* CustomCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D40D2D20E0B5CF00FFDCD2 /* CustomCollectionViewCell.swift */; };
+		05D40D3020E0B5CF00FFDCD2 /* CustomCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05D40D2E20E0B5CF00FFDCD2 /* CustomCollectionViewCell.xib */; };
+		05D40D3220E0BA1E00FFDCD2 /* CollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D40D3120E0BA1E00FFDCD2 /* CollectionView.swift */; };
 		05DB2E2120DBC95900116261 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DB2E2020DBC95900116261 /* AppDelegate.swift */; };
 		05DB2E2320DBC95900116261 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05DB2E2220DBC95900116261 /* MainViewController.swift */; };
 		05DB2E2620DBC95900116261 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05DB2E2420DBC95900116261 /* Main.storyboard */; };
 		05DB2E2920DBC95900116261 /* iDemo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 05DB2E2720DBC95900116261 /* iDemo.xcdatamodeld */; };
 		05DB2E2B20DBC95E00116261 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 05DB2E2A20DBC95E00116261 /* Assets.xcassets */; };
 		05DB2E2E20DBC95E00116261 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05DB2E2C20DBC95E00116261 /* LaunchScreen.storyboard */; };
+		05F65F7920E0E7330067EC76 /* JsonData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F65F7820E0E7330067EC76 /* JsonData.swift */; };
+		05F65F7B20E108080067EC76 /* NavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05F65F7A20E108080067EC76 /* NavigationBar.swift */; };
 		BCA1EA440F92299E1F662878 /* Pods_iDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90FC33B5D227DEB55A98A7E3 /* Pods_iDemo.framework */; };
 /* End PBXBuildFile section */
 
@@ -26,9 +30,11 @@
 		050ED6B320DCF67F00963A8C /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
 		050ED6B520DCF69000963A8C /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		050ED6B720DCF6AB00963A8C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		054A7E6D20DD016C001CFFE8 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
-		054A7E7020DD0294001CFFE8 /* SaveLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveLoad.swift; sourceTree = "<group>"; };
+		054A7E7020DD0294001CFFE8 /* SaveLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveLoad.swift; sourceTree = "<group>"; usesTabs = 1; };
 		054A7E7220DD1204001CFFE8 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		05D40D2D20E0B5CF00FFDCD2 /* CustomCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCollectionViewCell.swift; sourceTree = "<group>"; };
+		05D40D2E20E0B5CF00FFDCD2 /* CustomCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCollectionViewCell.xib; sourceTree = "<group>"; };
+		05D40D3120E0BA1E00FFDCD2 /* CollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionView.swift; sourceTree = "<group>"; };
 		05DB2E1D20DBC95900116261 /* iDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = iDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05DB2E2020DBC95900116261 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		05DB2E2220DBC95900116261 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -37,6 +43,8 @@
 		05DB2E2A20DBC95E00116261 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		05DB2E2D20DBC95E00116261 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		05DB2E2F20DBC95E00116261 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		05F65F7820E0E7330067EC76 /* JsonData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonData.swift; sourceTree = "<group>"; };
+		05F65F7A20E108080067EC76 /* NavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBar.swift; sourceTree = "<group>"; };
 		4C502AD3920079BA536531FA /* Pods-iDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-iDemo/Pods-iDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		90FC33B5D227DEB55A98A7E3 /* Pods_iDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_iDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF27040A6E83862DA20909B0 /* Pods-iDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-iDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-iDemo/Pods-iDemo.release.xcconfig"; sourceTree = "<group>"; };
@@ -57,8 +65,9 @@
 		054A7E6F20DD0195001CFFE8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				054A7E6D20DD016C001CFFE8 /* UIViewController.swift */,
 				054A7E7020DD0294001CFFE8 /* SaveLoad.swift */,
+				05F65F7820E0E7330067EC76 /* JsonData.swift */,
+				05F65F7A20E108080067EC76 /* NavigationBar.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -102,6 +111,8 @@
 				054A7E7220DD1204001CFFE8 /* ImagePicker.swift */,
 				050ED6B520DCF69000963A8C /* SignInViewController.swift */,
 				050ED6B720DCF6AB00963A8C /* HomeViewController.swift */,
+				05D40D3120E0BA1E00FFDCD2 /* CollectionView.swift */,
+				05D40D2D20E0B5CF00FFDCD2 /* CustomCollectionViewCell.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -111,6 +122,7 @@
 			children = (
 				05DB2E2C20DBC95E00116261 /* LaunchScreen.storyboard */,
 				05DB2E2420DBC95900116261 /* Main.storyboard */,
+				05D40D2E20E0B5CF00FFDCD2 /* CustomCollectionViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -228,6 +240,7 @@
 				05DB2E2E20DBC95E00116261 /* LaunchScreen.storyboard in Resources */,
 				05DB2E2B20DBC95E00116261 /* Assets.xcassets in Resources */,
 				05DB2E2620DBC95900116261 /* Main.storyboard in Resources */,
+				05D40D3020E0B5CF00FFDCD2 /* CustomCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,14 +297,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				054A7E7120DD0294001CFFE8 /* SaveLoad.swift in Sources */,
-				054A7E6E20DD016C001CFFE8 /* UIViewController.swift in Sources */,
 				05DB2E2920DBC95900116261 /* iDemo.xcdatamodeld in Sources */,
 				054A7E7320DD1204001CFFE8 /* ImagePicker.swift in Sources */,
 				05DB2E2320DBC95900116261 /* MainViewController.swift in Sources */,
+				05F65F7920E0E7330067EC76 /* JsonData.swift in Sources */,
 				050ED6B420DCF67F00963A8C /* SignUpViewController.swift in Sources */,
 				050ED6B620DCF69000963A8C /* SignInViewController.swift in Sources */,
 				05DB2E2120DBC95900116261 /* AppDelegate.swift in Sources */,
 				050ED6B820DCF6AB00963A8C /* HomeViewController.swift in Sources */,
+				05D40D3220E0BA1E00FFDCD2 /* CollectionView.swift in Sources */,
+				05D40D2F20E0B5CF00FFDCD2 /* CustomCollectionViewCell.swift in Sources */,
+				05F65F7B20E108080067EC76 /* NavigationBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

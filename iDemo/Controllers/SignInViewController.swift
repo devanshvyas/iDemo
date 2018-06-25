@@ -18,7 +18,7 @@ class SignInViewController: UIViewController {
   @IBOutlet weak var password: UITextField!
   override func viewDidLoad() {
         super.viewDidLoad()
-    
+     
     }
 
   @IBAction func loginButton(_ sender: UIButton) {
@@ -26,6 +26,7 @@ class SignInViewController: UIViewController {
     let check = SaveLoad.shared.checkCredentials(with: predicate, password: password.text!)
     if check == true{
       SVProgressHUD.showSuccess(withStatus: "Login Successfull!")
+      performSegue(withIdentifier: "toHome", sender: self)
     }
     else{
       SVProgressHUD.showError(withStatus: "Invalid Username or password")
