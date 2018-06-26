@@ -15,6 +15,8 @@ class JsonData {
   //MARK: variables
   static let shared = JsonData()
   var imageURL = [URL]()
+  var imageTitle = [String]()
+  var imageId = [Decimal]()
   var param = ["key":"9256559-4577776c3a6d49717de08f786"]
   var apiURL = "https://pixabay.com/api/"
   
@@ -28,8 +30,10 @@ class JsonData {
         let json = JSON(response.result.value!)
         let hits = json["hits"]
         for (index,_) in hits.enumerated(){
-          if let temp = hits[index]["webformatURL"].url{
-            self.imageURL.append(temp)
+          if let url = hits[index]["webformatURL"].url,let id = hits[index]["id"].int, let tags = hits[index]["tags"].string{
+            self.imageURL.append(url)
+            self.imageTitle.append(tags)
+            self.imageId.append(Decimal(id))
           }
           if index == hits.count-1{
             finished()

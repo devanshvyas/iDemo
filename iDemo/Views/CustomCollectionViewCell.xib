@@ -51,6 +51,7 @@
             <size key="customSize" width="274" height="138"/>
             <connections>
                 <outlet property="cellImage" destination="TDr-no-ZkF" id="K53-pQ-aRZ"/>
+                <outlet property="likeBtn" destination="Qcs-il-E36" id="X5f-2f-bcn"/>
                 <outlet property="widthConstraints" destination="pRS-YM-U0s" id="uwJ-Pq-fpb"/>
             </connections>
             <point key="canvasLocation" x="-91" y="67"/>

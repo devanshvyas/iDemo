@@ -8,16 +8,27 @@
 
 import UIKit
 import Kingfisher
+import SVProgressHUD
 
-extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout{
+extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, LikeDelegate{
+  
+  
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return imgUrls.count-1
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCollectionViewCell", for: indexPath) as! CustomCollectionViewCell
+    let url = imgUrls[indexPath.row]
     
-    let url = imgUrls[indexPath.row+1]
+    DispatchQueue.main.async {
+      cell.likeBtn.imageView?.tintColor = self.isFav[indexPath.row] ? UIColor.red : UIColor.white
+    }
+    
+    
+    debugPrint("Index:\(indexPath.row): \(isFav[indexPath.row])")
+    
+    cell.delegate = self
     cell.cellImage.kf.setImage(with: url)
     
     return cell
@@ -28,5 +39,26 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     return CGSize(width: width, height: width)
   }
   
-
+  
+  //MARK: Delegate method
+  func likeAction(sender: CustomCollectionViewCell) {
+    guard let index = collectionView.indexPath(for: sender) else {return}
+    let check = SaveLoad.shared.checkImage(user: user!, id: JsonData.shared.imageId[index.row])
+    if check == false{
+      let newItem = Favourites(context: SaveLoad.shared.context)
+      newItem.id = JsonData.shared.imageId[index.row] as NSDecimalNumber
+      newItem.title = JsonData.shared.imageTitle[index.row]
+//      newItem.images = userDetails
+      isFav[index.row] = true
+      SaveLoad.shared.save()
+      collectionView.reloadItems(at: [index])
+    }
+    else{
+      isFav[index.row] = false
+      let predicate = NSPredicate(format: "id == %@",NSDecimalNumber(decimal: JsonData.shared.imageId[index.row]))
+      SaveLoad.shared.delete(with: predicate)
+      collectionView.reloadItems(at: [index])
+    }
+  }
+  
  }

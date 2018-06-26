@@ -18,6 +18,10 @@ class MainViewController: UIViewController {
     navigationController?.navigationBar.shadowImage = UIImage()
     navigationController?.navigationBar.backgroundColor = UIColor.clear
     navigationController?.navigationBar.isTranslucent = true
+    let isLogin = SaveLoad.shared.defaults.bool(forKey: "isLogin")
+    if isLogin == true{
+      performSegue(withIdentifier: "toHome", sender: self)
+    }
   }
 //
 //  UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
