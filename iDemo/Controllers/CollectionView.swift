@@ -48,7 +48,7 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
       let newItem = Favourites(context: SaveLoad.shared.context)
       newItem.id = JsonData.shared.imageId[index.row] as NSDecimalNumber
       newItem.title = JsonData.shared.imageTitle[index.row]
-//      newItem.images = userDetails
+      newItem.images = userDetails
       isFav[index.row] = true
       SaveLoad.shared.save()
       collectionView.reloadItems(at: [index])

@@ -18,8 +18,8 @@ class HomeViewController: UIViewController{
       isSelected()
     }
   }
-//  var like = [Favourites]()
   var user = SaveLoad.shared.defaults.string(forKey: "user")
+  var userDetails: UserData?
   var isFav = [Bool]()
   
   //MARK: Outlets
@@ -45,11 +45,11 @@ class HomeViewController: UIViewController{
       self.mainImage.kf.setImage(with: self.imgUrls[0])
       self.collectionView.delegate = self
       self.collectionView.dataSource = self
-//      self.isSelected()
       self.collectionView.reloadData()
     }
-//    like = SaveLoad.shared.loadFavData()
     self.collectionView.register(UINib.init(nibName: "CustomCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "CustomCollectionViewCell")
+    let predicate = NSPredicate(format: "username == %@", user!)
+    userDetails = SaveLoad.shared.getUserData(with: predicate)
  }
   override func viewWillAppear(_ animated: Bool) {
     collectionView.reloadData()

@@ -41,22 +41,22 @@ class SaveLoad{
 		return favArray!
 	}
   //MARK: Functions
-	func checkCredentials(with predicate: NSPredicate , password : String) -> (check: Bool, user: UserData){
+	func checkCredentials(with predicate: NSPredicate , password : String) -> Bool{
     let request: NSFetchRequest<UserData> = UserData.fetchRequest()
     request.predicate = predicate
     do{
       checkData = try context.fetch(request)
       if checkData?.count != 0 && checkData?[0].password == password{
-				return (true,checkData![0])
+				return true
       }
       else{
-				return (false,UserData())
+				return false
       }
     }
     catch{
       fatalError("Error while fetching!")
     }
-		return (false,UserData())
+		return false
  }
   
   func checkUsername(with predicate: NSPredicate) -> Bool{
@@ -92,7 +92,18 @@ class SaveLoad{
       fatalError("Error while checking user")
     }
   }
-	
+	func getUserData(with predicate: NSPredicate) -> UserData {
+		let request: NSFetchRequest<UserData> = UserData.fetchRequest()
+		request.predicate = predicate
+		let data: [UserData]?
+		do{
+			data = try context.fetch(request)
+		}
+		catch{
+			fatalError("Error while getting data")
+		}
+		return data![0]
+	}
 	func checkImage(user: String, id: Decimal) -> Bool {
 		
 		let request: NSFetchRequest<Favourites> = Favourites.fetchRequest()
