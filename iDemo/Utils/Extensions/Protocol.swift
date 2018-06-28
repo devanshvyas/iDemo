@@ -11,3 +11,7 @@ import UIKit
 protocol LikeDelegate {
   func likeAction(sender: CustomCollectionViewCell)
 }
+
+protocol TableCellLikeDelegate {
+  func likePressed(sender: CustomTableViewCell)
+}

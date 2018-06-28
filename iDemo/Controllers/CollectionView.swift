@@ -12,9 +12,9 @@ import SVProgressHUD
 
 extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, LikeDelegate{
   
-  
+  //MARK: collection view delegates and data source
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return imgUrls.count-1
+    return imgUrls.count
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -39,6 +39,18 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     return CGSize(width: width, height: width)
   }
   
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    performSegue(withIdentifier: "toSelectedFav", sender: self)
+    
+  }
+  
+  //MARK: navigation
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "toSelectedFav"{
+      let destination = segue.destination as! SelectedFavViewController
+      destination.index = collectionView.indexPathsForSelectedItems![0].row
+    }
+  }
   
   //MARK: Delegate method
   func likeAction(sender: CustomCollectionViewCell) {
@@ -48,7 +60,8 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
       let newItem = Favourites(context: SaveLoad.shared.context)
       newItem.id = JsonData.shared.imageId[index.row] as NSDecimalNumber
       newItem.title = JsonData.shared.imageTitle[index.row]
-      newItem.images = userDetails
+      newItem.imageUrl = "\(JsonData.shared.imageURL[index.row])"
+      newItem.images = userDetails!
       isFav[index.row] = true
       SaveLoad.shared.save()
       collectionView.reloadItems(at: [index])

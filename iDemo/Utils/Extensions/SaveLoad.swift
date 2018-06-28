@@ -40,7 +40,8 @@ class SaveLoad{
 		}
 		return favArray!
 	}
-  //MARK: Functions
+	
+  //MARK: for sign up and sign in
 	func checkCredentials(with predicate: NSPredicate , password : String) -> Bool{
     let request: NSFetchRequest<UserData> = UserData.fetchRequest()
     request.predicate = predicate
@@ -92,6 +93,7 @@ class SaveLoad{
       fatalError("Error while checking user")
     }
   }
+	
 	func getUserData(with predicate: NSPredicate) -> UserData {
 		let request: NSFetchRequest<UserData> = UserData.fetchRequest()
 		request.predicate = predicate
@@ -104,6 +106,8 @@ class SaveLoad{
 		}
 		return data![0]
 	}
+	
+	//MARK: functions for favourite image
 	func checkImage(user: String, id: Decimal) -> Bool {
 		
 		let request: NSFetchRequest<Favourites> = Favourites.fetchRequest()
@@ -137,4 +141,19 @@ class SaveLoad{
 			fatalError("Error while deleting")
 		}
 	}
+	
+	func loadFavUserImage(user: String) -> [Favourites]{
+		let request: NSFetchRequest<Favourites> = Favourites.fetchRequest()
+		let pre = NSPredicate(format: "images.username == %@", user)
+		request.predicate = pre
+		let data: [Favourites]?
+		do{
+			data = try context.fetch(request)
+		}
+		catch{
+			fatalError("Error while getting data")
+		}
+		return data!
+	}
+	
 }

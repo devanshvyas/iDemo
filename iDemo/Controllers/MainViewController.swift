@@ -10,26 +10,27 @@ import UIKit
 
 class MainViewController: UIViewController {
 
-  @IBOutlet var mainView: UIView!
+  @IBOutlet var backView: UIView!
+  @IBOutlet weak var stackView: UIStackView!
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+    
+    navBarStyle()
+   backView.layer.cornerRadius = 8
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    navBarStyle()
+  }
+  
+  func navBarStyle() {
     navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
     navigationController?.navigationBar.shadowImage = UIImage()
     navigationController?.navigationBar.backgroundColor = UIColor.clear
     navigationController?.navigationBar.isTranslucent = true
-    let isLogin = SaveLoad.shared.defaults.bool(forKey: "isLogin")
-    if isLogin == true{
-      performSegue(withIdentifier: "toHome", sender: self)
-    }
   }
-//
-//  UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
-//  // Sets shadow (line below the bar) to a blank image
-//  UINavigationBar.appearance().shadowImage = UIImage()
-//  // Sets the translucent background color
-//  UINavigationBar.appearance().backgroundColor = .clear
-//  // Set translucent. (Default value is already true, so this can be removed if desired.)
-//  UINavigationBar.appearance().isTranslucent = true
+
 }
 

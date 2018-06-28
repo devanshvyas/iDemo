@@ -26,8 +26,11 @@ class SignUpViewController: UIViewController {
   
   override func viewDidLoad() {
         super.viewDidLoad()
-    
+   
  }
+  override func viewWillAppear(_ animated: Bool) {
+   
+  }
 
   //MARK: Buttons Action
   @IBAction func signUpButton(_ sender: UIButton) {
@@ -47,6 +50,9 @@ class SignUpViewController: UIViewController {
             newData.profilePic = img
           }
           data.save()
+          SaveLoad.shared.defaults.set(true, forKey: "isLogin")
+          SaveLoad.shared.defaults.set(username.text!, forKey: "user")
+          performSegue(withIdentifier: "toHome", sender: self)
           SVProgressHUD.showSuccess(withStatus: "Account Created")
         }
         else{
@@ -76,8 +82,22 @@ class SignUpViewController: UIViewController {
   
 }
 
-
-
+//MARK: Image Picker
+extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate{
+  
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage{
+      profileImage.contentMode = .scaleAspectFill
+      profileImage.image = pickedImage
+      dismiss(animated: true, completion: nil)
+    }
+  }
+  
+  func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    dismiss(animated: true, completion: nil)
+  }
+  
+}
 
 
 

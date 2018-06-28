@@ -9,6 +9,7 @@
 import UIKit
 import SVProgressHUD
 
+
 class HomeViewController: UIViewController{
  
   //MARK: Variables
@@ -30,15 +31,9 @@ class HomeViewController: UIViewController{
   override func viewDidLoad() {
         super.viewDidLoad()
     SVProgressHUD.load()
-    UIApplication.shared.statusBarStyle = .lightContent
-    let statusBar: UIView = UIApplication.shared.value(forKey: "statusBar") as! UIView
-    if statusBar.responds(to: #selector(setter: UIView.backgroundColor)){
-      statusBar.backgroundColor = UIColor(red: 12/255, green: 59/255, blue: 131/255, alpha: 0.8)
-    }
-    navigationItem.hidesBackButton = true
-    navigationController?.navigationBar.tintColor = UIColor.white
-    navigationController?.navigationBar.backgroundColor = UIColor(red: 12/255, green: 59/255, blue: 131/255, alpha: 0.8)
    
+    navigationItem.hidesBackButton = true
+ 
     JsonData.shared.networking(que: "Education"){
       self.imgUrls = JsonData.shared.imageURL
       self.imgId = JsonData.shared.imageId
@@ -52,8 +47,8 @@ class HomeViewController: UIViewController{
     userDetails = SaveLoad.shared.getUserData(with: predicate)
  }
   override func viewWillAppear(_ animated: Bool) {
-    collectionView.reloadData()
-  }
+    isSelected()
+   }
   //MARK: Search Button
   @IBAction func searchButton(_ sender: UIBarButtonItem) {
     searchTextfield.isHidden = false
@@ -67,17 +62,23 @@ class HomeViewController: UIViewController{
       let search = searchText.replacingOccurrences(of: " ", with: "+", options: .literal, range: nil)
       JsonData.shared.networking(que: search){
         self.imgUrls = JsonData.shared.imageURL
+        self.imgId = JsonData.shared.imageId
         self.mainImage.kf.setImage(with: self.imgUrls[0])
         self.collectionView.reloadData()
-        self.isSelected()
+//        self.isSelected()
         self.searchTextfield.isHidden = true
         SVProgressHUD.dismiss()
       }
     }
   }
+  @IBAction func logoutButton(_ sender: UIBarButtonItem) {
+    self.navigationController?.popToRootViewController(animated: true)
+    SaveLoad.shared.defaults.set(false, forKey: "isLogin")
+  }
   
   //MARK: isSelected
   func isSelected(){
+    isFav.removeAll()
     if let id = imgId{
       for (index,_) in imgId!.enumerated(){
         let check = SaveLoad.shared.checkImage(user: user!, id: id[index])

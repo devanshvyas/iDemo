@@ -22,6 +22,8 @@ class JsonData {
   
   func networking(que: String = "nature", page: Int = 1,finished : @escaping ()-> Void){
     imageURL.removeAll()
+    imageId.removeAll()
+    imageTitle.removeAll()
     param["q"] = que
     param["page"] = String(page)
     Alamofire.request("https://pixabay.com/api/", method: .get, parameters: param).responseJSON {
