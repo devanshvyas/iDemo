@@ -72,7 +72,10 @@ class HomeViewController: UIViewController{
     }
   }
   @IBAction func logoutButton(_ sender: UIBarButtonItem) {
-    self.navigationController?.popToRootViewController(animated: true)
+    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+    let initialViewController = storyboard.instantiateViewController(withIdentifier: "toMainVC")
+    UIApplication.shared.keyWindow?.rootViewController = initialViewController
+    UIApplication.shared.keyWindow?.makeKeyAndVisible()
     SaveLoad.shared.defaults.set(false, forKey: "isLogin")
   }
   

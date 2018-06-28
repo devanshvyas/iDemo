@@ -17,7 +17,7 @@
         <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="iDemo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="toMainVC" id="BYZ-38-t0r" customClass="MainViewController" customModule="iDemo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -687,7 +687,7 @@
         <image name="user-profile" width="85" height="85"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="CKK-Jz-XlC"/>
+        <segue reference="aof-gL-mqr"/>
         <segue reference="WWn-M6-ggR"/>
         <segue reference="e8r-ON-fPt"/>
         <segue reference="WAN-YA-eJo"/>

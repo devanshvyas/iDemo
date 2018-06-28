@@ -27,6 +27,7 @@ class SignUpViewController: UIViewController {
   override func viewDidLoad() {
         super.viewDidLoad()
    
+   
  }
   override func viewWillAppear(_ animated: Bool) {
    
@@ -87,8 +88,10 @@ extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationCon
   
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
     if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage{
-      profileImage.contentMode = .scaleAspectFill
+//      profileImage.contentMode = .scaleAspectFill
       profileImage.image = pickedImage
+      profileImage.layer.cornerRadius = profileImage.frame.width/2
+      profileImage.clipsToBounds = true
       dismiss(animated: true, completion: nil)
     }
   }
