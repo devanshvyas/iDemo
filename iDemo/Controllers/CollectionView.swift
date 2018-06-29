@@ -24,12 +24,11 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     DispatchQueue.main.async {
       cell.likeBtn.imageView?.tintColor = self.isFav[indexPath.row] ? UIColor.red : UIColor.white
     }
-    
-    
-    debugPrint("Index:\(indexPath.row): \(isFav[indexPath.row])")
-    
     cell.delegate = self
     cell.cellImage.kf.setImage(with: url)
+    if indexPath.row == imgUrls.count-1{
+      SVProgressHUD.dismiss()
+    }
     
     return cell
   }
@@ -41,9 +40,8 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     performSegue(withIdentifier: "toSelectedFav", sender: self)
-    
   }
-  
+
   //MARK: navigation
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "toSelectedFav"{
@@ -74,4 +72,4 @@ extension HomeViewController: UICollectionViewDataSource, UICollectionViewDelega
     }
   }
   
- }
+}

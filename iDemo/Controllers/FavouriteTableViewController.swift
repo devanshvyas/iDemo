@@ -11,25 +11,26 @@ import Kingfisher
 
 class FavouriteTableViewController: UITableViewController , TableCellLikeDelegate{
  
-
   //MARK: Variables
   var favArray = SaveLoad.shared.loadFavUserImage(user: SaveLoad.shared.defaults.string(forKey: "user")!)
-  var isFavourite = [Bool]()
   var imageDetail = [ImageDetail]()
+  var referenceArray: [Favourites]?
+  var deleteCount = 0
   
   override func viewDidLoad() {
       super.viewDidLoad()
-
+    referenceArray = favArray
   }
 
-
+  override func viewWillDisappear(_ animated: Bool) {
+    SaveLoad.shared.save()
+  }
+  
   // MARK: - Table view data source and delegates
-
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
       return favArray.count
   }
-
-
+  
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "tableCell", for: indexPath) as! CustomTableViewCell
     cell.delegate = self
@@ -38,30 +39,35 @@ class FavouriteTableViewController: UITableViewController , TableCellLikeDelegat
       object.image = cell.favImage.image!
       object.title = self.favArray[indexPath.row].title
       self.imageDetail.append(object)
-      }
-    
+    }
     return cell
   }
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     performSegue(withIdentifier: "toSelectedFav", sender: self)
   }
+  
   //MARK: to delete in Fav List
-  func likePressed(sender: CustomTableViewCell) {
+  func likePressed(sender: CustomTableViewCell, state: Bool) {
     if let index = tableView.indexPath(for: sender){
-      SaveLoad.shared.context.delete(favArray[index.row])
-      favArray.remove(at: index.row)
-      imageDetail.remove(at: index.row)
-      SaveLoad.shared.save()
-      tableView.reloadData()
+      if state{
+        SaveLoad.shared.context.delete(favArray[index.row - deleteCount])
+        favArray.remove(at: index.row - deleteCount)
+        deleteCount += 1
+      }
+      else{
+        let newItem = Favourites(context: SaveLoad.shared.context)
+        if let obj = referenceArray?[index.row]{
+          newItem.id = obj.id
+          newItem.imageUrl = obj.imageUrl
+          newItem.title = obj.title
+          newItem.images = obj.images
+        }
+      }
     }
   }
 
-  
-
-
   // MARK: - Navigation
-
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     let destination = segue.destination as! SelectedFavViewController
     if let index = tableView.indexPathForSelectedRow?.row{

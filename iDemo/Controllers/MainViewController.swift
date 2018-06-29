@@ -12,17 +12,11 @@ class MainViewController: UIViewController {
 
   @IBOutlet var backView: UIView!
   @IBOutlet weak var stackView: UIStackView!
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
-    
-    navBarStyle()
-   backView.layer.cornerRadius = 8
-  }
-  
+   
   override func viewWillAppear(_ animated: Bool) {
-    navBarStyle()
+   print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+   backView.layer.cornerRadius = 8
+   navBarStyle()
   }
   
   func navBarStyle() {

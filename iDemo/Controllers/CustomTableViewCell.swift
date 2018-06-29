@@ -12,6 +12,7 @@ class CustomTableViewCell: UITableViewCell {
 
   //MARK: Variables and Outlets
   var delegate: TableCellLikeDelegate?
+  var state = false
   
   @IBOutlet weak var favImage: UIImageView!
   @IBOutlet weak var likeButton: UIButton!
@@ -20,9 +21,15 @@ class CustomTableViewCell: UITableViewCell {
         super.awakeFromNib()
     }
 
-  
   @IBAction func likeButtonPressed(_ sender: UIButton) {
-    delegate?.likePressed(sender: self)
+    if sender.isSelected == false{
+      sender.isSelected = !sender.isSelected
+      delegate?.likePressed(sender: self,state: sender.isSelected)
+    }
+    else{
+      sender.isSelected = !sender.isSelected
+      delegate?.likePressed(sender: self,state: sender.isSelected)
+    }
   }
   
 }

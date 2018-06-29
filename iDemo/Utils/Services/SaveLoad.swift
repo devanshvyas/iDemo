@@ -17,7 +17,7 @@ class SaveLoad{
   var checkData: [UserData]?
 	var checkImg: [Favourites]?
 	let defaults = UserDefaults.standard
-	
+//	var checkItem 
 	
   //MARK: Save Function
   func save(){
@@ -25,7 +25,7 @@ class SaveLoad{
         try context.save()
     }
     catch{
-        fatalError("Error saving Data")
+        print(error)
     }
   }
 	//MARK: Load Data

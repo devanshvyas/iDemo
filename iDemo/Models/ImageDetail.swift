@@ -11,4 +11,5 @@ import UIKit
 class ImageDetail {
   var image: UIImage?
   var title: String?
+  var state: Bool?
 }

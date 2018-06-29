@@ -15,13 +15,11 @@ class SignInViewController: UIViewController {
   @IBOutlet weak var username: UITextField!
   @IBOutlet weak var password: UITextField!
   @IBOutlet weak var rememberButton: UIButton!
-  override func viewDidLoad() {
-        super.viewDidLoad()
-    
-    }
+  
   override func viewWillAppear(_ animated: Bool) {
-   
+    hideKeyboard()
   }
+  
   @IBAction func loginButton(_ sender: UIButton) {
     let predicate = NSPredicate(format: "username MATCHES %@", username.text!)
     let check = SaveLoad.shared.checkCredentials(with: predicate, password: password.text!)
@@ -42,4 +40,17 @@ class SignInViewController: UIViewController {
     sender.isSelected = !sender.isSelected
   }
   
+  @IBAction func signUpPressed(_ sender: UIButton) {
+    if let viewsCounts = navigationController?.viewControllers.count{
+      if viewsCounts >= 3{
+        navigationController?.popViewController(animated: true)
+      }
+      else{
+        performSegue(withIdentifier: "toSignUp", sender: self)
+      }
+    }
+    else{
+      performSegue(withIdentifier: "toSignUp", sender: self)
+    }
+  }
 }

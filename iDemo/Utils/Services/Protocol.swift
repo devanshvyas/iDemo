@@ -13,5 +13,5 @@ protocol LikeDelegate {
 }
 
 protocol TableCellLikeDelegate {
-  func likePressed(sender: CustomTableViewCell)
+  func likePressed(sender: CustomTableViewCell, state: Bool)
 }

@@ -18,8 +18,7 @@ class CustomCollectionViewCell: UICollectionViewCell {
  
   override func awakeFromNib() {
         super.awakeFromNib()
-     
-    }
+  }
 
   @IBAction func likeButton(_ sender: UIButton) {
     delegate?.likeAction(sender: self)

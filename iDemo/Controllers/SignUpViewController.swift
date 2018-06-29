@@ -24,53 +24,73 @@ class SignUpViewController: UIViewController {
   @IBOutlet weak var password: UITextField!
   @IBOutlet weak var profileImage: UIImageView!
   
-  override func viewDidLoad() {
-        super.viewDidLoad()
-   
-   
- }
   override func viewWillAppear(_ animated: Bool) {
-   
+    hideKeyboard()
   }
 
+  
+  
   //MARK: Buttons Action
   @IBAction func signUpButton(_ sender: UIButton) {
     let predicate1 = NSPredicate(format: "username MATCHES %@", username.text ?? "")
-    let predicate2 = NSPredicate(format: "%@ like '*@*.com'", email.text ?? "")
+    let predicate2 = NSPredicate(format: "%@ like '?*@?*.com'", email.text ?? "")
     let checkUser = data.checkUsername(with: predicate1)
     let checkMail = data.checkEmail(with: predicate2)
     if (name.text != ""),(email.text != ""),(mobileNo.text != ""),(username.text != ""),(password.text != ""){
-      if checkMail == true{
-        if checkUser == true{
-          newData.fullName = name.text
-          newData.email = email.text
-          newData.mobileNumber = Int64(mobileNo.text!)!
-          newData.username = username.text
-          newData.password = password.text
-          if let img = profileImage.image{
-            newData.profilePic = img
+      if checkingText(name, .decimalDigits),checkingText(name, .symbols),checkingText(name, .punctuationCharacters){
+        if mobileNo.text?.count == 10 , checkingText(mobileNo, .letters) , checkingText(mobileNo, .symbols){
+          if checkingText(password, .symbols){
+            if checkMail == true, checkingText(email, .symbols){
+              if checkUser == true , checkingText(username, .symbols){
+                  newData.fullName = name.text
+                  newData.email = email.text
+                  newData.mobileNumber = Int64(mobileNo.text!)!
+                  newData.username = username.text
+                  newData.password = password.text
+                  if let img = profileImage.image{
+                    newData.profilePic = img
+                  }
+                  data.save()
+                  SaveLoad.shared.defaults.set(true, forKey: "isLogin")
+                  SaveLoad.shared.defaults.set(username.text!, forKey: "user")
+                  performSegue(withIdentifier: "toHome", sender: self)
+                  SVProgressHUD.showSuccess(withStatus: "Account Created")
+              }
+              else{
+                SVProgressHUD.showError(withStatus: "Username Exists!")
+              }
+            }
+            else{
+             SVProgressHUD.showError(withStatus: "Invalid Email")
+            }
           }
-          data.save()
-          SaveLoad.shared.defaults.set(true, forKey: "isLogin")
-          SaveLoad.shared.defaults.set(username.text!, forKey: "user")
-          performSegue(withIdentifier: "toHome", sender: self)
-          SVProgressHUD.showSuccess(withStatus: "Account Created")
+          else{
+            SVProgressHUD.showError(withStatus: "Invalid Password")
+          }
         }
         else{
-          SVProgressHUD.showError(withStatus: "Username Exists!")
+          SVProgressHUD.showInfo(withStatus: "Invalid Mobile Number")
         }
       }
-      else{
-        SVProgressHUD.showError(withStatus: "Invalid Email")
-      }
-      
+    else{
+      SVProgressHUD.showInfo(withStatus: "Invalid FullName")
+    }
+  }
+  else{
+    SVProgressHUD.showInfo(withStatus: "Fill all fields")
+  }
+  }
+
+  func checkingText(_ textField: UITextField,_ presentChar: CharacterSet) -> Bool {
+    let checkRange = textField.text?.rangeOfCharacter(from: presentChar)
+    if checkRange == nil{
+      return true
     }
     else{
-      SVProgressHUD.showInfo(withStatus: "Fill all fields")
+      return false
     }
-    
   }
-  
+  	
   @IBAction func addImage(_ sender: UIButton) {
     if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
       imagePicker.delegate = self
@@ -80,6 +100,19 @@ class SignUpViewController: UIViewController {
     }
   }
 
+  @IBAction func signInPressed(_ sender: UIButton) {
+    if let viewsCount = navigationController?.viewControllers.count{
+      if viewsCount >= 3{
+        navigationController?.popViewController(animated: true)
+      }
+      else{
+        performSegue(withIdentifier: "toSignIn", sender: self)
+      }
+    }
+    else{
+      performSegue(withIdentifier: "toSignIn", sender: self)
+    }
+  }
   
 }
 
@@ -99,6 +132,10 @@ extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationCon
   func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
     dismiss(animated: true, completion: nil)
   }
+  
+  
+  
+  
   
 }
 
