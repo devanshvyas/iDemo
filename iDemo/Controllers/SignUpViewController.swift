@@ -121,7 +121,6 @@ extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationCon
   
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
     if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage{
-//      profileImage.contentMode = .scaleAspectFill
       profileImage.image = pickedImage
       profileImage.layer.cornerRadius = profileImage.frame.width/2
       profileImage.clipsToBounds = true
@@ -132,11 +131,7 @@ extension SignUpViewController: UIImagePickerControllerDelegate, UINavigationCon
   func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
     dismiss(animated: true, completion: nil)
   }
-  
-  
-  
-  
-  
+
 }
 
 

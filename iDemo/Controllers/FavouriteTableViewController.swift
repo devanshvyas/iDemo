@@ -14,12 +14,10 @@ class FavouriteTableViewController: UITableViewController , TableCellLikeDelegat
   //MARK: Variables
   var favArray = SaveLoad.shared.loadFavUserImage(user: SaveLoad.shared.defaults.string(forKey: "user")!)
   var imageDetail = [ImageDetail]()
-  var referenceArray: [Favourites]?
-  var deleteCount = 0
+  var referenceArray = SaveLoad.shared.loadFavUserImage(user: SaveLoad.shared.defaults.string(forKey: "user")!)
   
   override func viewDidLoad() {
       super.viewDidLoad()
-    referenceArray = favArray
   }
 
   override func viewWillDisappear(_ animated: Bool) {
@@ -51,18 +49,17 @@ class FavouriteTableViewController: UITableViewController , TableCellLikeDelegat
   func likePressed(sender: CustomTableViewCell, state: Bool) {
     if let index = tableView.indexPath(for: sender){
       if state{
-        SaveLoad.shared.context.delete(favArray[index.row - deleteCount])
-        favArray.remove(at: index.row - deleteCount)
-        deleteCount += 1
+        SaveLoad.shared.context.delete(favArray[index.row])
+        favArray.remove(at: index.row)
       }
       else{
         let newItem = Favourites(context: SaveLoad.shared.context)
-        if let obj = referenceArray?[index.row]{
-          newItem.id = obj.id
-          newItem.imageUrl = obj.imageUrl
-          newItem.title = obj.title
-          newItem.images = obj.images
-        }
+        let obj = referenceArray[index.row]
+        newItem.id = obj.id
+        newItem.imageUrl = obj.imageUrl
+        newItem.title = obj.title
+        newItem.images = obj.images
+        favArray.append(newItem)
       }
     }
   }
